@@ -1,40 +1,79 @@
 <!DOCTYPE html>
-<html ng-app="interactiveMap">
+<html ng-app="presidential">
 <head>
-	<title></title>
+    <title></title>
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
 
-	<link rel="stylesheet" type="text/css" href="css/styles.css">
-
-	<script type="text/javascript" src="js/angular.min.js"></script>
-	<script type="text/javascript" src="js/state-objects.js"></script>
-	<script type="text/javascript" src="js/controller.js"></script>
+    <!-- Javascript -->
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> -->    
+    <script src="js/angular.min.js"></script>    
+    <script type="text/javascript" src="https://code.angularjs.org/1.5.0-beta.2/angular-animate.min.js"></script>    
+    <script type="text/javascript" src="js/state-objects.js"></script>
+    <script type="text/javascript" src="js/cntl.js"></script>
 
 </head>
 <body>
 
-<div id="wrapper" ng-controller="interactiveMapCntrl">
+<div id="wrapper" ng-app="myApp">
+    <div id="presidentialWrapper" ng-controller='presMapCntrl' style="position:relative;">
 
 
 
-	<svg width="730" height="500">
-		<g class="states" ng-repeat="state in states" click-state>
-			<path class="state {{state.stateColor}}" ng-attr-d="{{state.vector}}" stroke="white"></path>
-			<foreignObject ng-attr-x={{state.nameX}} ng-attr-y={{state.nameY}}>
+        <div id="map" style="position:relative;height:475px">
+                    
+                <div id="view_container">
 
-				<body>
-					<div class="state-info">{{state.abbr}}<br />{{state.electoralVotes}}</div>
-				</body>
+                    <div id="starting_view" style="display: none;">
+                        Select a Starting View:<br>
+                        <select id="change_view">
+                            <option value="aDRgM">Same Since 2000</option>
+                            <option value="M3n2q">NBC Initial Projection</option>
+                            <option value="eqKJa">2008 Actual</option>
+                            <option value="wqjAa">All Republican</option>
+                            <option value="BadRM">All Democrat</option>
+                            <option value="B5B1M">Blank Map</option>
+                            <option value="2M36q">2012 Competitive</option>
+                            <option value="qKlZM">2012 Very Close</option>
+                            <option value="j59LM">2012 Actual</option>
+                            <option value="5WL3m">2016 Battleground Map</option>
+                            <option value="MQRx2" selected="">2016 Toss-up Map</option>
+                        </select><br>
+                        <span id="view_description">States most likely to be competitive</span>
+                    </div>
+                </div>
+                <div style="position:absolute;top:220px;left:680px">
+                    <table cellspacing="5">
+                        <tbody><tr><td id="sp_25" class="map_text sp_state" style="width: 20px; height: 20px; background-color: rgb(36, 73, 153);">11</td><td class="map_text">MA</td></tr>
+                        <tr><td id="sp_44" class="map_text sp_state" style="width: 20px; height: 20px; background-color: rgb(36, 73, 153);">4</td><td class="map_text">RI</td></tr>
+                        <tr><td id="sp_09" class="map_text sp_state" style="width: 20px; height: 20px; background-color: rgb(36, 73, 153);">7</td><td class="map_text">CT</td></tr>
+                        <tr><td id="sp_34" class="map_text sp_state" style="width: 20px; height: 20px; background-color: rgb(36, 73, 153);">14</td><td class="map_text">NJ</td></tr>
+                        <tr><td id="sp_10" class="map_text sp_state" style="width: 20px; height: 20px; background-color: rgb(36, 73, 153);">3</td><td class="map_text">DE</td></tr>
+                        <tr><td id="sp_24" class="map_text sp_state" style="width: 20px; height: 20px; background-color: rgb(36, 73, 153);">10</td><td class="map_text">MD</td></tr>
+                        <tr><td id="sp_11" class="map_text sp_state" style="width: 20px; height: 20px; background-color: rgb(36, 73, 153);">3</td><td class="map_text">DC</td></tr>
+                    </tbody></table>
+                </div>
 
-			</foreignObject>
-		</g>
-	</svg>
+            <svg width="730" height="500">
+                <defs id="defs"></defs>
+                <!-- remember, snake case for attribute, camel for directive name -->
+                <g class="states" ng-repeat="state in states" ng-animate=" 'animate' " click-state>
+                    <path class="state {{state.stateColor}}" ng-attr-d={{state.vector}} id="{{state.name}}" stroke="white">{{state.stateColor}}</path>
+                    <foreignObject class="state" ng-attr-x={{state.nameX}} ng-attr-y={{state.nameY}} width="20" height="30">
+                        <body>
+                            <div class="state_info">{{state.abbr}}<br>{{state.electoralVotes}}</div>
+                        </body>
+                    </foreignObject>
+
+
+Red states: <div id="statetest" ng-repeat="state in redStates">{{state.id}}</div>
+                </g>          
+            </svg>
+
+        </div>
+    </div>
 </div>
-
-<div class="red-states-total">{{redStatesTotal}}</div>
-<div class="blue-states-total">{{blueStatesTotal}}</div>
-<div class="open-states-total">{{openStatesTotal}}</div>
-
-
-
 </body>
-</html>
+
+
+

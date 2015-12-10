@@ -1,24 +1,336 @@
 
-.blue{
-	fill: blue;
+* { margin: 0; padding: 0px; }
+BODY, TD {font-family: 'Trebuchet MS',Helvetica;font-size: 10pt;}
+	
+	#main{width:960px;margin: 0 auto;background-color:white}
+
+	#map_info #map_type{border-right:1px solid #CCC;float:left;width:160px;font-size:49px;font-weight:bold;padding:10px 5px}
+
+	#map_info .slider_colors{text-align:center;color:white}
+
+	#body{height:645px;background-image:url('../images/background_paper.jpg');padding:0;margin:0}
+
+	.circle {-webkit-border-radius: 50%; -moz-border-radius: 50%; border-radius:50%; }
+	.rep_elected{width:80px;text-align:center}
+	a.race_url{color:white;text-decoration: none}
+	a.race_url:hover{color:black}
+		
+	a.left_links, a.left_links:visited {text-decoration:none;border-bottom: 1px solid #CCC;color:#8EB0CA}
+	
+	.side_links{color:red;text-decoration:none}
+	
+	.background {fill: none;pointer-events: all;}
+
+	#state-borders,.state-boundaries {fill: none;stroke: #fff;stroke-width: 1.5px;stroke-linejoin: round;stroke-linecap: round;pointer-events: none;}
+	path {stroke-linejoin: round;}
+	.district-boundaries {pointer-events: none;fill: none;stroke: #ddd;stroke-width: 1px;}
+	.state{cursor: pointer; cursor: hand; }
+	.header{font-weight:bold; font-family: Arial, sans-serif; font-size: 14px}
+	.state_district{width:60px;text-align:center;padding: 5px}
+	.rep_img{width:70px;text-align:center;padding: 5px}
+	.rep_title_name_notes{width:200px;padding: 5px; vertical-align: middle; }
+	.retired_notes, .seat_vacant{color:#767676; font-size:0.9em; font-family: 'Arial', sans-serif; font-style:italic}
+	.rep_party{width:55px;text-align:center;padding: 5px}
+	.rep_since{width:55px;text-align:center;padding: 5px}
+	.rep_term{width:55px;text-align:center;padding: 5px}
+	.rep_elected{width:160px;text-align:center;padding: 5px}
+	.rep_race_info{width:60px;text-align:center;}
+	.whats_new { width: 100px; text-align:center; }
+
+	.info { color: #444; border-top: 1px solid #e0e0e0; border-bottom: 1px solid #e0e0e0; background-color: #f7f7f7; padding: 5px 10px 10px 10px; }
+	.color_pick:hover > div { display:block }
+	.color_drop{border: 2px solid #CCC;background-color: #eee;position:absolute;padding: 5px 5px;width:220px;display:none;}
+	.color_drop div{width:30px;height:30px}
+	.color_drop div:hover{border:2px solid #CCC}
+	.color_drop td {border-right:1px solid #CCC;height:25px}
+	.overlay {fill: none;pointer-events: all;}
+	#reset{margin-top:0px}
+
+	a.pro_link{color:black;text-decoration:none}
+
+	.pro_link:hover{color:blue}
+	
+	
+	.ui-slider-range { background: #00C; }
+
+	p { line-height: 1.5em; margin: 0 0 10px 0;}
+
+	.ui-slider-handle {
+		-ms-touch-action: none;
+		touch-action: none;
+	}
+
+	.obama { color: #445E96; }
+	.romney { color: #BA3A33; }
+	.obama_none { color: #a9c0de; }
+	.romney_none { color: #eaa9a8; }
+	.faded  { color: gray; }
+	.bold { font-weight: bold; }
+	.d100 { color: #00f; }
+	.r100 { color: #f00; }
+
+	#legend { width: 686px; }
+	.lblock { width: 50px; border: 1px solid white; float: left; }
+	.lcap { width: 25px; border: 1px solid white; float: left; }
+	.fsadfancybox-wrap { border: 5px solid #CC0000; }
+	.fancybox-skin { background: #fff; }
+	
+	.circle { 
+		-webkit-border-radius: 50%;
+		-moz-border-radius: 50%; 
+		border-radius: 50%; 
+		margin-left:auto; 
+		margin-right:auto; 
+		width:20px; 
+		height:20px;
+	}
+	
+	.nice_button {
+	    /* Structure */
+	    display: inline-block;
+	    *display: inline; /*IE 6/7*/
+	    zoom: 1;
+	    line-height: normal;
+	    white-space: nowrap;
+	    vertical-align: baseline;
+	    text-align: center;
+	    cursor: pointer;
+	    -webkit-user-drag: none;
+	    -webkit-user-select: none;
+	    -moz-user-select: none;
+	    -ms-user-select: none;
+	    user-select: none;
+	}
+
+	/* Firefox: Get rid of the inner focus border */
+	.nice_button::-moz-focus-inner {
+	    padding: 0;
+	    border: 0;
+	}
+
+	.nice_button {
+	    font-family: inherit;
+	    font-size: 100%;
+	    *font-size: 90%; /*IE 6/7 - To reduce IE's oversized button text*/
+	    *overflow: visible; /*IE 6/7 - Because of IE's overly large left/right padding on buttons */
+	    padding: 0.5em 1em;
+	    color: #444; /* rgba not supported (IE 8) */
+	    color: rgba(0, 0, 0, 0.80); /* rgba supported */
+	    *color: #444; /* IE 6 & 7 */
+	    border: 1px solid #999;  /*IE 6/7/8*/
+	    border: none rgba(0, 0, 0, 0);  /*IE9 + everything else*/
+	    background-color: #E6E6E6;
+	    text-decoration: none;
+	    border-radius: 2px;
+	}
+
+	.nice_button-hover,
+	.nice_button:hover,
+	.nice_button:focus {
+	    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#1a000000',GradientType=0);
+	    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(transparent), color-stop(40%, rgba(0,0,0, 0.05)), to(rgba(0,0,0, 0.10)));
+	    background-image: -webkit-linear-gradient(transparent, rgba(0,0,0, 0.05) 40%, rgba(0,0,0, 0.10));
+	    background-image: -moz-linear-gradient(top, rgba(0,0,0, 0.05) 0%, rgba(0,0,0, 0.10));
+	    background-image: -o-linear-gradient(transparent, rgba(0,0,0, 0.05) 40%, rgba(0,0,0, 0.10));
+	    background-image: linear-gradient(transparent, rgba(0,0,0, 0.05) 40%, rgba(0,0,0, 0.10));
+	}
+	.nice_button:focus {
+	    outline: 0;
+	}
+	.nice_button-active,
+	.nice_button:active {
+	    box-shadow: 0 0 0 1px rgba(0,0,0, 0.15) inset, 0 0 6px rgba(0,0,0, 0.20) inset;
+	}
+	
+	.int_pop { display:none; background-color:white;width:500px;padding:25px;border:5px solid #CC0000}
+	.button{background-color:#0000CF;border-radius:10px;box-shadow:0 2px 3px rgba(0,0,0,0.3);color:#fff;cursor:pointer;display:inline-block;padding:10px 20px;text-align:center;text-decoration:none}
+	.bClose{border-radius:7px 7px 7px 7px;box-shadow:none;font:bold 120% sans-serif;padding:5px 6px 2px;position:absolute;right:-7px;top:-7px}
+	
+	/* Sortable tables */
+	table.sortable {
+		font-size: 1.3em;
+	}
+	table.sortable td,th {
+		padding: 5px;
+	}
+	table.sortable td {
+		font-size: 1em;
+	}
+	table.sortable thead {
+	    background-color:#aeaaaa;
+	    color:#fff;
+	    font-weight: bold;
+	    cursor: default;
+	}
+	table.sortable tbody tr:nth-child(2n) td {
+	  background: #ededed;
+	}
+	table.sortable tbody tr:nth-child(2n+1) td {
+	  background: #fff;
+	}
+	#thead {
+		padding-top: 5px; margin: 0; text-align:center; font-size:1.3em; font-weight:bold; text-decoration: underline; background-color:#aeaaaa; color: #fff;
+	}
+	th.sort { cursor: pointer; cursor: hand; }
+	
+	a.ety { color: black; text-decoration: none;}
+	a.ety:hover { color: #00f; }
+	
+	li.green { color: green; margin: 0; padding: 0;}
+	
+	#elections td{text-align:center; padding:5px}
+	.now_col{background-color:#CCC}
+	.d_col{color:#244999;font-weight:bold;font-family:'Trebuchet MS',Helvetica;font-size:16px}
+	.d_circle{background-color:#244999}
+	.i_col{color:#07ac31;font-weight:bold;font-family:'Trebuchet MS',Helvetica;font-size:16px}
+	.i_circle{background-color:#07ac31}
+	.r_col{color:#d22532;font-weight:bold;font-family:'Trebuchet MS',Helvetica;font-size:16px}
+	.r_circle{background-color:#d22532}
+
+table.unbootstrap { 
+	border-collapse: separate !important; 
+	border-spacing: 2px !important;
+}
+
+#map_description {
+    width: 650px;
+    text-align: justify;
+    min-height: 48px;
+    line-height: 1.5em;
+}
+
+#view_container {
+    position: absolute;
+    top: 430px;
+    left: 380px;
+    width: 200px;
+    text-align: center;
+    z-index: 1000;
+}
+#user_generated {
+    font-weight: bold; 
+    text-align: center; 
+    padding-bottom: 10px;
+}
+#starting_view { font-weight: bold; text-align: center; }
+#change_view { margin: 10px 0; }
+#view_description { font-weight: normal; font-size: 0.9em; }
+.state, .sp_state{cursor: pointer; cursor: hand; }
+.sp_state{color:white;text-align:center;padding:0 5px}
+.map_text{font-family:Helvetica;font-size:8pt;font-weight:bold}
+
+object, embed {outline: 0}
+.maps{float:left;text-align:center}
+.small_map{width:130px;height:74px}    
+.polls_group{overflow:hidden;margin-top:10px;clear:both}    
+.polls_type{float:left;width:70px}
+.polls{float:left;width:320px}
+.poll_links{text-decoration:none;color:black}
+a.links:hover{color:blue}
+
+.state_info {
+    text-align:center;
+    font-size:8pt;
+    color:white;
+    font-weight:bold;
+    font-family:Helvetica
+}
+
+#share_button {
+    background-color: #348134; 
+    color: #fff !important;
+    text-decoration: none !important;
+    
+}
+
+.nice-dropdown {
+	background: #fff;
+	height: 19px;
+	#width: 190px;
+	
+	border-width: 0px;
+    border-style: solid;
+    border-color: #fff;
+	display: block;
+	cursor: pointer;
+	position: relative;
+}
+
+#dem_name {
+    padding: 6px 0px 5px 10px;
+    color: #244999;
+    width: 100px;
+}
+#rep_name {
+    text-align: right;
+    padding: 6px 10px 5px 0px;
+    color: #D22532;
+    width: 100px;
+}
+
+
+ul[class^=sub_menu] {
+	display: none;
+	width: 120px;
+	padding: 6px 0;
+	list-style: none;
+	margin: 0;
+	background-color: #FFF;
+	border: 1px solid #C7C7C7;
+	position: absolute;
+	z-index: 200;
+    border-radius: 3px;
+    top: 25px;
+    z-index: 9001;
+}
+ul#r_candidates {
+    right: 0;
+}
+ul#d_candidates {
+    left: 0;
+}
+ul[class^=sub_menu] li {
+	color: #656565;
+	padding: 5px 10px;
+    position: relative;
+    z-index: 9002;
+}
+ul#r_candidates {
+    text-align:right;
+}
+ul#d_candidates li:hover {
+	background-color: #eef6fb;
+}
+ul#r_candidates li:hover {
+	background-color: #FFCCCC;
+}
+ul[class^=sub_menu] li a, a.nav_link, .external_links_sub a {
+	color: #333;
+	text-decoration: none;
+}
+ul[class^=sub_menu] li a:hover, a.nav_link:hover, .external_links_sub a:hover {
+	text-decoration: underline;
+}
+
+.sub_menu li button {
+  border: none; 
+  background: none;
+  padding: 0;
+  position: realtive;
+  z-index: 100;
+}
+
+#map svg{
+	background-color: #cacaca;
 }
 
 .red{
-	fill: red;
+	fill: red;	
 }
 
+.blue{
+	fill: blue;
+}
 .open{
 	fill: #c2b280;
 }
-
-#wrapper svg{
-	background-color: #cacaca
-}
-
-.state-info{
-	color: white;
-	font-size: 12px;
-	font-weight: bold;
-	text-align: center;
-}
-
